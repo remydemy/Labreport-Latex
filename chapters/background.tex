@@ -1,0 +1,50 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+% !TeX root = ../thesis.tex
+
+\chapter{Background}
+\label{chapter:background}
+\section{5G Network}
+5G networks are cellular networks, in which the service area is divided into small geographical areas called cells. All 5G wireless devices in a cell communicate by radio waves with a cellular base station via fixed antennas, over frequency channels assigned by the base station. The base stations, termed nodes, are connected to switching centers in the telephone network and routers for Internet access by high-bandwidth optical fiber or wireless backhaul connections. As in other cellular networks, a mobile device moving from one cell to another is automatically handed off seamlessly.
+
+
+The 5G system architecture is defined in TS 23.501. The most relevant parts of the system architecture are the Radio Access Network (RAN), which in 5G Networks is called 5G New Radio (5G NR), and the Core Network. The packet protocol for mobility management (establishing connection and moving between base stations) and session management (connecting to networks and network slices) is described in TS 24.501. Specifications of key data structures are found in TS 23.003.
+
+
+Frequency bands for 5G NR, which is the air interface or radio access technology of the 5G mobile networks, are separated into two different frequency ranges, this is defined in TS 38.101. First there is Frequency Range 1 (FR1), which includes sub-6 GHz frequency bands, some of which are traditionally used by previous standards, but has been extended to cover potential new spectrum offerings from 410 MHz to 7125 MHz. The other is Frequency Range 2 (FR2), which includes frequency bands from 24.25 GHz to 71.0 GHz. These frequency ranges are used on different bands depending on in which country the 5G network is located in \cite{zhang2017overview}. 
+
+\section{Slicing}
+Network slicing separates the network into multiple logical networks. Each logical network is designed to serve a defined business purpose and comprises of all the required network resources, configured and connected end-to-end. 
+The underlying purpose of network slicing is to guarantee different users different Qualities of Service (QoS).
+Since the range of use case scenarios of the 5G network is very diverse one can not guarantee every QoS for every user, hence the need for slicing.
+
+Standards exist, but the implementation of network slicing depends on the service provider. Due to this there is not much to be found on how to implement slicing. 
+The standards are regulated by the 3rd Generation Partnership Project (3GPP). The most important standards for slicing are the TS 22.261 (Version 18.6.1) and TS 23.501 (Version 17.5.0).
+
+In TS 23.501 the 3GPP defined five different Slice/Service Types (SST):
+\begin{table}
+\begin{tabularx}{\textwidth}{c|c|p{8cm}}
+\textbf{Slice/Service Types} & \textbf{SST value} & \textbf{Characteristics} \\
+\hline
+  eMBB   & 1 & Slice suitable for the handling of 5G enhanced Mobile Broadband. \\
+  URLLC   & 2 & Slice suitable for the handling of ultra- reliable low latency communications. \\
+  MIoT   & 3 & Slice suitable for the handling of massive IoT. \\
+  V2X   & 4 & Slice suitable for the handling of V2X services. \\
+  HMTC   & 5 & Slice suitable for the handling of High-Performance Machine-Type
+Communications. \\
+\end{tabularx}
+\caption{Slice/Service Types}
+\label{t:slice/service types}
+\end{table}
+
+% TODO: Tomaso?
+In most implementations frequencies are dynamically assigned in order to guarantee the corresponding values for the SST. The values that are relevant include the data rate, latency and low packet loss.
+
+\section{DDoS Attack in 5G Networks}
+\subsection{DDos Attack}
+Denial-of-service attack (DoS attack) is a cyber-attack in which the perpetrator seeks to make a machine or network resource unavailable to its intended users by temporarily or indefinitely disrupting services of a host connected to a network. Denial of service is typically accomplished by flooding the targeted machine or resource with superfluous requests in an attempt to overload systems and prevent some or all legitimate requests from being fulfilled.
+
+In a distributed denial-of-service attack (DDoS attack), the incoming traffic flooding the victim originates from many different sources. More sophisticated strategies are required to mitigate against this type of attack, as simply attempting to block a single source is insufficient because there are multiple sources.
+
+\subsection{Relevance of DDoS Attacks in 5G Networks}
+Due to the improved capabilities of 5G Networks in regards to speed, capacity and latency the threat of DDoS Attacks has increased since malicious parties can also use these improved capabilities. Here network slicing can potentially help on isolating malicious parties onto a separate slice, where they can not harm anyone.\cite{sattar2019towards}

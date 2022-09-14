@@ -1,0 +1,121 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+% !TeX root = ../thesis.tex
+
+\chapter{Implementation}
+\label{chapter:implementation}
+\section{ns-3}
+
+\subsection{ns-3 Setup}
+
+The following is a setup guide to install and build\footnote[1]{\url{https://www.nsnam.org/docs/tutorial/html/getting-started.html}} ns-3 on Mac OS and Linux. Unfortunately it doesn't run on Windows natively and you need a WSL/VM.
+
+\subsubsection{Prerequisites}
+\begin{itemize}
+    \item C++ compiler: clang++ or g++
+    \item Python: python3 version $\geq$ 3.6
+    \item cmake version $\geq$ 3.10
+    \item Build system: make, ninja, (xcodebuild necessary for Mac OS)
+\end{itemize}
+
+\subsubsection{Installation}
+
+In order to use git to save your own commits fork the official ns-3 GitLab Repository\footnote[2]{\url{https://gitlab.com/nsnam/ns-3-dev}}. After you successfully forked the repository clone it onto your computer. Next open a terminal window in the repository folder. You then have to checkout the desired version of ns-3 by checking out the corresponding tag. (It's recommended to create a branch starting at this tag.) 
+
+\subsubsection{Building ns-3}
+
+\begin{enumerate}
+    \item In order to configure ns-3 enter: \begin{verbatim}
+    ./ns3 configure --enable-examples --enable-tests
+\end{verbatim}
+\item To build ns-3 enter: \begin{verbatim}
+    ./ns3
+\end{verbatim}
+    You will see a lot of compiler output messages. This command also runs the enabled tests. Here it is important that all the tests pass and none fail or crash.
+\end{enumerate}
+
+\subsubsection{Running scripts via the command line}
+
+Run your first file by entering: 
+\begin{verbatim}
+    ./ns3 run hello-simulator
+\end{verbatim}
+Your output should be: \textit{Hello Simulator}.
+
+\subsubsection{IDE Setup}
+
+In order to run ns-3 from VS Code install the following extensions:\footnote[3]{\url{https://www.youtube.com/watch?v=Ab8eYHhT5I8}}
+\begin{itemize}
+    \item C/C++ (When using Arch Linux either use Clangd Highlighting or install C/C++ manually.\footnote[4]{\url{https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools}})
+    \item CMake
+    \item CMake Tools
+\end{itemize}
+You now can run your ns-3 scripts via the CMake extension.
+
+\textbf{If your build is continuously not successful turn off} \begin{verbatim}
+    NS3_WARNINGS_AS_ERRORS
+\end{verbatim} \textbf{in the root CMakeLists.txt.}
+
+\subsubsection{Running your own scripts}
+
+Create a new \textit{.cc} file in the \textit{scratch} folder, or copy an existing example into the scratch folder. For the compiler to recognize your script in the \textit{scratch} folder you must add: \begin{verbatim}
+    \ingroup scratch
+    \file {filename}
+\end{verbatim} in a doxygen comment right at the beginning of the file. You can now run your script.
+
+\section{5G-Lena simulator}
+In order to use the 5G-Lena module\footnote[5]{\url{https://5g-lena.cttc.es/}} to simulate a 5G network you unfortunately have to write the 5G-Lena project an email to request access to their GitLab-Repository.
+
+The GitLab-Repository to access the 5G-Lena module, that simulates a 5G network, is now openly accessible\footnote[6]{\url{https://gitlab.com/cttc-lena/nr}}.
+To use the module either clone the repository or add it as a submodule into \textit{./contrib}.
+
+\section{Implementation details}
+    Our base simulation is based on standard 5G-Lena examples. Therefore we will not go too in depth on explaining that part of the simulation.
+    Mainly we will focus on our take on slicing.
+    
+    \subsection{Network slicing}
+    In most slicing implementations frequencies are dynamically assigned to the slices. However this frequency allocation relies heavily on environmental variables such as the terrain. Therefore we decided to assign frequencies statically based on their capabilities to help guarantee QoS, data rate and latency, e.g.: high frequency for high data rate.
+    
+    In our slicing implementation the slicing guarantees are made by two factors, the aforementioned static frequency allocation and 5G-Lena's core network calculations which in turn are specified by the EPSBearer. 
+    
+    The EPSBearer serves as a functional component of the frequency band. By allocating this EPSBearer to a band 5G-Lena is instructed to ensure these QoS guarantees.
+    
+    \subsection{Technical details}
+    In 5G-NR there are five slicing types as mentioned in Table \ref{t:slice/service types}. We only focused on the following three:
+    \begin{itemize}
+        \item eMBB: Enhanced mobile broadband
+        \begin{itemize}
+            \item Used for high mobility in macro and small cells and for a reduced power consumption.
+            \item SST value: 1
+            \item Frequency: 28 GHz
+            \item Bandwidth: 4000 MHz
+            \item Subcarrier spacing: 15 KHz
+            \item Data rate: 20 Gbp/s
+            \item EPSBearer: \verb!NGBR_LOW_LAT_EMBB!
+        \end{itemize}
+        \item mMTC: massive machine type communication
+        \begin{itemize}
+            \item Used for long range connectivity with a low data rate and low cost for machine to machine communication.
+            \item SST value: 5
+            \item Frequency: 700 MHz
+            \item Bandwidth: 5 MHz
+            \item Subcarrier spacing: 30 KHz
+            \item Data rate: 1-100 Kbp/s
+            \item EPSBearer: \verb!DGBR_ITS! 
+        \end{itemize}
+        \item URLLC: Ultra reliable low latency communication
+        \begin{itemize}
+            \item Used for ultra responsive connections between multiple devices.
+            \item SST value: 2
+            \item Frequency: 3.5 GHz
+            \item Bandwidth: 100 MHz
+            \item Subcarrier spacing: 60 KHz
+            \item Data rate: 50 Kbp/s - 10 Mbp/s
+            \item EPSBearer: \verb!DGBR_DISCRETE_AUT_SMALL!
+        \end{itemize}
+    \end{itemize}
+    
+    \subsection{DDoS simulation}
+    Our DDoS simulation is capable of attacking each aforementioned slicing type. To do so you have to give the desired slice type (``dosURLLC'', ``dosMMTC'', ``dosEMBB'') and the amount of bots that are flooding the server in the DoS-Attack (``botAmount'') as a command line argument. If turned on the slice type flag enables the part of the code, where the bots are activated. 
+    The bots are a simple ns3-OnOffApplication with the corresponding EPSBearer that runs on the specified slice.
+    The bots use a separate remote host with a UDP packet sink.    

@@ -1,0 +1,237 @@
+\documentclass[fontsize=10pt,openright,oneside,paper=a4,BCOR=1cm,numbers=noenddot]{scrbook}
+
+
+\usepackage[top=3.5cm, bottom=3.5cm, left=3.0cm, right=4.0cm]{geometry}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic definitions, to be adjusted individually
+\newcommand{\authornamefirstone}{Tim}
+\newcommand{\authornamelastone}{Greller}
+\newcommand{\matrikelnummerone}{102871}
+\newcommand{\authornamefirsttwo}{Jonas}
+\newcommand{\authornamelasttwo}{Heitz}
+\newcommand{\matrikelnummertwo}{102939}
+\newcommand{\authornamefirstthree}{Sebastian}
+\newcommand{\authornamelastthree}{Pretzsch}
+\newcommand{\matrikelnummerthree}{103114}
+\newcommand{\authornamefirstfour}{Finn}
+\newcommand{\authornamelastfour}{Ribbeck}
+\newcommand{\matrikelnummerfour}{102876}
+\newcommand{\authornamefirstfive}{Emily}
+\newcommand{\authornamelastfive}{Vorderwülbeke}
+\newcommand{\matrikelnummerfive}{103087}
+\newcommand{\authors}{{\authornamefirstone~\authornamelastone, \authornamefirsttwo~\authornamelasttwo,
+            \authornamefirstthree~\authornamelastthree, \authornamefirstfour~\authornamelastfour,
+            \authornamefirstfive~\authornamelastfive}}
+
+\newcommand{\worktitle}{DDos Attacks inside a Simulation Suite for Network Slicing in 5G Networks}
+
+\newcommand{\thesistype}{Labreport}
+\newcommand{\courseofstudies}{Computer Science}
+
+\newcommand{\thesisdate}{2022--09--21}   %% in ISO 8601 format
+
+\newcommand{\thesisprof}{Dr.-Ing. Tolga Arul}
+\newcommand{\chair}{\mbox{Chair of Computer Engineering}}
+
+\newcommand{\advisor}{Felix Klement}
+
+
+\newcommand{\contactprofone}{
+\thesisprof \\
+\chair \\
+Universität Passau \\
+Email:~{\small \url{tolga.arul@uni-passau.de}}  \\
+Web:~{\small
+\url{https://www.fim.uni-passau.de/en/computer-engineering/}}\\}
+
+%\newcommand{\drosera}{\textit{Drosera}\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% PACKAGES:
+
+\usepackage{color}
+\usepackage[colorinlistoftodos,prependcaption]{todonotes}
+\usepackage{xargs}
+
+\newcommandx{\mytodo}[2][1=]{\todo[linecolor=yellow,backgroundcolor=yellow!25,bordercolor=yellow,inline,#1]{#2}}
+
+% Use English :
+
+% Use list of tabels, etc. in table of contents:
+\usepackage[nottoc]{tocbibind}
+% German paragraph skip
+\usepackage{parskip}
+% Encoding. Use utf8. We are now in the 21st century already... :-)
+\usepackage[utf8]{inputenc}
+% Index-generation
+\usepackage{makeidx}
+% Einbinden von URLs:
+\usepackage{url}
+% Special \LaTex symbols (e.g. \BibTeX):
+\usepackage{doc}
+% Include Graphic-files:
+%\usepackage{graphics}
+% Include Graphic-files:
+\usepackage{graphicx}
+% Include doc++ generated tex-files:
+%\usepackage{docxx}
+% Include PDF links
+\usepackage{listings}
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage{multirow}
+%mathstuff
+\usepackage[cmex10]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{longtable}
+\usepackage{pgf-pie}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{pdfpages}
+\usepackage{multicol}
+\usepackage{xspace}
+\newcounter{mtpage}
+
+% TODOOOOO
+%hyperref for nice PDF output
+%\usepackage[pdftex, 
+%bookmarks=true,
+%pdfauthor={authors},
+%pdftitle={{{\worktitle}}},
+%hidelinks
+%]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% OTHER SETTINGS:
+
+% Pagestyle:
+\pagestyle{headings}
+
+% Avoid 'overhang':
+\sloppy
+
+% Choose language
+\newcommand{\setlang}[1]{\selectlanguage{#1}\nonfrenchspacing}
+
+\usepackage[english]{babel}
+
+\setlang{english}
+%\setlang{german}
+
+\usepackage[Bjornstrup]{fncychap}
+
+\definecolor{bblue}{HTML}{00A2FF}
+\definecolor{rred}{HTML}{FF2600}
+\definecolor{ggreen}{HTML}{61D836}
+\definecolor{ppurple}{HTML}{C24885}
+\definecolor{oorange}{HTML}{F8BA00}
+\definecolor{ggray}{HTML}{5F5F5F}
+\definecolor{ppink}{HTML}{e81cbf}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TITLE:
+
+\begin{document}
+\frontmatter
+\thispagestyle{empty}
+\newpage
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{lr}
+\includegraphics[width=6.5cm]{img/logouni_en.png}
+\end{tabular}
+
+\vspace{3cm}
+\Large University of Passau
+\\
+\Large Faculty of Computer Science and Mathematics
+\\
+\vspace{0.3cm}
+\Large {\chair }
+\\
+\Large \thesisprof
+
+\end{center}
+
+
+\vspace{2.5cm}
+
+\begin{center}
+        % Master's thesis, Bachelor's thesis, Programming project
+        {\Large \thesistype\\ in \\ \courseofstudies} 
+\end{center}
+
+\begin{center}
+        \settowidth{\baselineskip}{0.4cm}
+        {\LARGE \textbf{\worktitle}}
+        \\
+        {\Large
+        \vspace{1cm}
+        \authornamefirstone~\authornamelastone~(\matrikelnummerone), \\
+        \authornamefirsttwo~\authornamelasttwo~(\matrikelnummertwo), \\
+        \authornamefirstthree~\authornamelastthree~(\matrikelnummerthree), \\
+        \authornamefirstfour~\authornamelastfour~(\matrikelnummerfour), \\
+        \authornamefirstfive~\authornamelastfive~(\matrikelnummerfive) \\
+        }
+\end{center}
+
+\vfill {% \settowidth{\baselineskip}{0.2cm}
+
+\vfill
+
+
+{\large
+\begin{tabular}[l]{llll}
+
+Date:       & \thesisdate %%(\LaTeX{}$2_\epsilon$ run \today)
+\smallskip \\
+Supervisor:   & \thesisprof \\
+Advisor: & \advisor \\
+\end{tabular}}
+} \cleardoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% MAIN PART:
+
+% Abstract. 
+\include{chapters/abstract}
+
+% Table of contents
+\tableofcontents
+
+% Main body of thesis
+\mainmatter
+\include{chapters/introduction}
+\include{chapters/background}
+
+\include{chapters/implementation}
+\include{chapters/visualisation}
+\include{chapters/evaluation}
+
+% References (Literaturverzeichnis):
+% a) Style (with numbers: use unsrt):
+\bibliographystyle{unsrt}
+% b) The File:
+\bibliography{Bibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

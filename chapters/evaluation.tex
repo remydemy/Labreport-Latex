@@ -1,0 +1,18 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+% !TeX root = ../thesis.tex
+
+\chapter{Evaluation and Discussion}
+\label{chapter:evaluation}
+\section{Was man aus daten lernt}
+    Jonas mit Jupyter notebook
+    
+\section{Problems with the Implementation}
+    \subsection{Slicing and Machine Learning}
+    Our analysis has shown that slicing prevents attacker nodes from influencing the traffic happening on other slices where no DoS-nodes are present. This enables us to isolate nodes that are executing the DDoS attack on their own slice. This way they would only influence each other.
+    
+    But due to our slicing implementation relying heavily on computational efforts provided by the 5G Lena network in addition to mainly using the EPSBearer for our QoS guarantees reassigning slices during runtime proved to be not possible. 
+    For future implementations that aim to use machine learning for DDoS prevention via Slice Isolation it is highly recommended to use this\footnote[7]{\url{https://github.com/matteonerini/5g-network-slicing-for-wifi-networks}} WiFi-Slicing implementation as a basis for the implementation in 5G-Lena.
+    
+    \subsection{TCP}
+    When trying to use TCP in the internet simulation no throughput could be recorded. Unfortunately we could not resolve this issue. This might be due to 5G-Lena not supporting TCP, yet, or due to our lack of understanding the network.
