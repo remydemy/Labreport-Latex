@@ -30,8 +30,8 @@
 
 \newcommand{\worktitle}{DDos Attacks inside a Simulation Suite for Network Slicing in 5G Networks}
 
-\newcommand{\thesistype}{Labreport}
-\newcommand{\courseofstudies}{Computer Science}
+\newcommand{\thesistype}{Advanced Security Engineering Lab}
+\newcommand{\courseofstudies}{Summer Term 2022}
 
 \newcommand{\thesisdate}{2022--09--21}   %% in ISO 8601 format
 
@@ -112,6 +112,8 @@ Web:~{\small
 
 % OTHER SETTINGS:
 
+\pgfplotsset{compat=1.18}
+
 % Pagestyle:
 \pagestyle{headings}
 
@@ -170,7 +172,9 @@ Web:~{\small
 
 \begin{center}
         % Master's thesis, Bachelor's thesis, Programming project
-        {\Large \thesistype\\ in \\ \courseofstudies} 
+        {\Large \thesistype 
+        
+        \courseofstudies} 
 \end{center}
 
 \begin{center}
@@ -179,11 +183,11 @@ Web:~{\small
         \\
         {\Large
         \vspace{1cm}
-        \authornamefirstone~\authornamelastone~(\matrikelnummerone), \\
-        \authornamefirsttwo~\authornamelasttwo~(\matrikelnummertwo), \\
-        \authornamefirstthree~\authornamelastthree~(\matrikelnummerthree), \\
-        \authornamefirstfour~\authornamelastfour~(\matrikelnummerfour), \\
-        \authornamefirstfive~\authornamelastfive~(\matrikelnummerfive) \\
+        \authornamefirstone~\authornamelastone~\textit{\matrikelnummerone} \\
+        \authornamefirsttwo~\authornamelasttwo~\textit{\matrikelnummertwo} \\
+        \authornamefirstthree~\authornamelastthree~\textit{\matrikelnummerthree} \\
+        \authornamefirstfour~\authornamelastfour~\textit{\matrikelnummerfour} \\
+        \authornamefirstfive~\authornamelastfive~\textit{\matrikelnummerfive} \\
         }
 \end{center}
 
@@ -219,6 +223,7 @@ Advisor: & \advisor \\
 \include{chapters/implementation}
 \include{chapters/visualisation}
 \include{chapters/evaluation}
+\include{chapters/conclusions}
 
 % References (Literaturverzeichnis):
 % a) Style (with numbers: use unsrt):

@@ -80,7 +80,7 @@ git submodule update --init --recursive --remote
 \end{verbatim}
 
 \subsection{Build ns-3}
-From here on we assume you are using a Debian based Linux.
+From here on we assume you are using a Debian based Linux. If you are on a different Linux distribution, you have to look up the required steps, commands and packages in the ns-3 setup guide PDF.
 
 Next the minimal required packages are installed:
 \begin{verbatim}
@@ -203,22 +203,31 @@ You now can run your ns-3 scripts via the CMake extension.
     \end{itemize}
     
     \subsection{Scenarios}
-    There are four different scenarios with different amounts of base stations and user entities that can be selected.
-    - 1. Scenario:
-	    - 1 GnB
-	    - 5 UE per GnB -> Distributed on the three slices.
-    - 2. Scenario:
-	    - 2 GnB
-	    - 10 UE per GnB -> Distributed on the three slices.
-    - 3. Scenario:
-	    - 2 GnB
-	    - 10 stationary UE per GnB ->  Distributed on the three slices.
-	    - 10 mobile UE per GnB -> Distributed on the three slices.
-        - TODO: Mobility has yet to be implemented.
-    - 4. Scenario:
-	    - 5 GnB
-	    - 40 UE per GnB -> Distributed on the three slices.
-        - TODO: Allocate slice type, mobile/stationary random.
+    There are four different scenarios with different amounts of base stations and user entities that can be selected:
+    \begin{enumerate}
+        \item Scenario:
+            \begin{itemize}
+                \item 1 \textit{Next Generation Node Basestation} (gNodeB or gNB)
+                \item 5 \textit{User Entity} (UE) per gNB $\rightarrow{}$ Distributed on the three slices.
+            \end{itemize}
+        \item Scenario:
+        \begin{itemize}
+            \item 2 gNB
+            \item 10 UE per gNB $\rightarrow{}$ Distributed on the three slices.
+        \end{itemize}
+        \item Scenario:
+        \begin{itemize}
+            \item 2 gNB
+	        \item 10 stationary UE per gNB $\rightarrow{}$ Distributed on the three slices.
+	        \item 10 mobile UE per gNB $\rightarrow{}$ Distributed on the three slices.
+        \end{itemize}
+        \item Scenario:
+        \begin{itemize}
+            \item 5 gNB
+            \item 40 UE per gNB $\rightarrow{}$ Distributed on the three slices.
+        \end{itemize}
+    \end{enumerate}
+    
     
     \subsection{DDoS simulation}
     Our DDoS simulation is capable of attacking each aforementioned slicing type. To do so you have to give the desired slice type (``dosURLLC'', ``dosMMTC'', ``dosEMBB'') and the amount of bots that are flooding the server in the DoS-Attack (``botAmount'') as a command line argument. If turned on the slice type flag enables the part of the code, where the bots are activated. 

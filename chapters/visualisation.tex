@@ -3,7 +3,8 @@
 % !TeX root = ../thesis.tex
 
 \NewDocumentCommand{\codeword}{v}{%
-	\texttt{\textcolor{blue}{#1}}%
+	\texttt{#1}%}
+	%\textcolor{blue}{
 }
 
 \chapter{Tracing and Visualization}
@@ -29,6 +30,15 @@ With the function \codeword{traceNodeContainerIPs} we additionally store which n
 
 \section{Trace data of all Device Operations with Packets}
 Using the PointToPointHelper and the AsciiTraceHelper of ns-3, we create a .tr file that contains one trace event per line. 
+The first character in that line describes the operation that happened on the device queue and can be one of these:
+\begin{itemize}
+    \item \texttt{+} enqueue
+    \item \texttt{-} dequeue
+    \item \texttt{d} packet dropped
+    \item \texttt{r} packet received
+\end{itemize}
+The next value, separated with a space, is the current simulation time in seconds.
+More details about this format can be found in the ns-3 tutorials. \footnote[11]{\url{https://www.nsnam.org/docs/release/3.9/tutorial/tutorial_23.html##:~:text=5.3.1.1}}
 
 \section{Tracing and 5G New Radio}
 \section{Visualization in NetAnim}
