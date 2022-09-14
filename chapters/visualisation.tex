@@ -2,9 +2,33 @@
 % !TeX spellcheck = en_GB
 % !TeX root = ../thesis.tex
 
+\NewDocumentCommand{\codeword}{v}{%
+	\texttt{\textcolor{blue}{#1}}%
+}
+
 \chapter{Tracing and Visualization}
 \label{chapter:tracing}
+In this section we describe how we retrieve tracing data from the simulation, output the tracing data to files in a specific format, parse this format with other programs/languages for further analysis and how we visualize the simulation using external software.
 
 \section{Basic Metrics of the Packet Flows}
+The main source of our data are the Flow Summary Files. They are created manually by our function \codeword{traceMetricsSummary} in the tracing file.
+Using the \codeword{ns3::FlowMonitor} we collect the following data:
+\begin{itemize}
+	\item Total number of transmitted packets for the flow (Tx Packets)
+	\item Total number of transmitted bytes for the flow (Tx Bytes)
+	\item Rate of transmitted bits for the flow (TxOffered)
+	\item Total number of received bytes for the flow (Rx Bytes)
+	\item Rate of recieved bits for the flow (Throughput)
+	\item Mean delay per recieved packet for the flow (Mean delay)
+	\item Mean jitter per recieved packet for the flow (Mean jitter)
+\end{itemize}
+
+With the function \codeword{traceNodeContainerIPs} we additionally store which nodes -- identified by their IP address -- are assigned to which slice (and which nodes are the base stations) during the simulation.
+
+\todo{maybe sample flow file in codeblock/figure-env}
+
 \section{Trace data of all Device Operations with Packets}
+
+
 \section{Tracing and 5G New Radio}
+\section{Visualization in NetAnim}
