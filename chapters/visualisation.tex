@@ -105,8 +105,28 @@ The next value, separated with a space, is the current simulation time in second
 More details about this format can be found in the ns-3 tutorials. \footnote[11]{\url{https://www.nsnam.org/docs/release/3.9/tutorial/tutorial_23.html##:~:text=5.3.1.1}}
 
 \section{Tracing and 5G New Radio}
+\subsection{About ns-3 Tracing and Callbacks}
+To build an own solution for tracing NR traffic, an in-depth analysis of ns-3s trace system was necessary.
+
+The interface ns-3 provides is the PointToPointHelpers EnableAsciiAll-method. Using this method tracing data written to the specified output stream can be obtained. Internally the PointToPointHelper uses other helpers such as the WimaxHelpers EnableAsciiInternal. These helpers have callback methods (trace sinks) on which our output stream gets bound to, so the callbacks write a line of tracing data once called. The callbacks are then connected to the corresponding ns-3 objects. 
+
+\subsection{Tracing of 5G NR traffic}
+The previously described method does not yield any results for the traffic between the UE devices and the gNodeBs over new radio. To overcome this issue, an implementation of tracing with callbacks was done for the NR UE net devices. 
+
+By overwriting the \texttt{Receive(Ptr<Packet> p)} method of NrNetDevice in the NrUeNetDevice implementation, access to the packets received by a NrUeNetDevice can be gained.
+
+To provide a clean design and interface to use this data, trace sources and callbacks are added to the NrUeNetDevice. With these you can use the events and their data analogous to the rest of the ns3 devices and objects.
+
+In our simulation the function, that gets called once an MacRx action in a NrUeNetDevice happens, is \texttt{nrTraceCallbackRxTr} in the tracing.cc file. It accepts an OutputStreamWrapper and context as bound parameters (specified on creation of the callback) and the received packet as argument. Using this, an output in the same format as in the .tr files can be created and written to a file.
+
+By comparing the output we gain through this callback with the data present in the .tr files, we can see that we obtain new data that is not already present in the default .tr files. While the same packets of course appear in the .tr file (as they're transmitted through different devices, including some not-NR ones), their simulation time and context (containing the node and device number) does not match with the context and time the packets are received at the NR devices. 
+
+While this works great for the receive-event, it does not for send-events, as the methods handling the sending of data are never called in the NrUeNetDevices.
+
+\textit{Conclusion:} In general the same trace system ns-3 uses everywhere can be applied to NR devices provided by the 5G-Lena module, as demonstrated successfully on the receive-event of NrUeNetDevices. Implementing the send, drop and other actions would need a deeper understanding of ns-3 and 5G-Lena and therefore more time.
+
 \section{Visualization in NetAnim}
-\subsection{Generating NetAnim XML data}
+\subsection{Generating NetAnim XML Data}
 We already described the installation process and the usage of NetAnim in \ref{subsection:InstallNetAnim}. Here we focus on how NetAnims AnimationInterface can be called from our own source code and how we can track, customize and visualize the traffic of our simulation.
 
 First the AnimationInterface is instantiated and the file where the XML output will be written to is specified.
