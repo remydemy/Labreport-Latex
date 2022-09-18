@@ -106,7 +106,13 @@ More details about this format can be found in the ns-3 tutorials. \footnote[11]
 
 \section{Tracing and 5G New Radio}
 \section{Visualization in NetAnim}
+\subsection{Generating NetAnim XML data}
+We already described the installation process and the usage of NetAnim in \ref{subsection:InstallNetAnim}. Here we focus on how NetAnims AnimationInterface can be called from our own source code and how we can track, customize and visualize the traffic of our simulation.
 
+First the AnimationInterface is instantiated and the file where the XML output will be written to is specified.
+
+In the next step we define the mobility model of our nodes. Because we want to arrange them in a static grid, we install the ns3::ConstantPositionMobilityModel on all node containers. Then a function in our tracing.cc file is called which takes care of positioning the nodes of each container in a line.
+\subsection{Adding our own data to the visualization}
 
 
 
