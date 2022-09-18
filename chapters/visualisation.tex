@@ -26,7 +26,71 @@ Using the \codeword{ns3::FlowMonitor} we collect the following data:
 
 With the function \codeword{traceNodeContainerIPs} we additionally store which nodes -- identified by their IP address -- are assigned to which slice (and which nodes are the base stations) during the simulation.
 
-\todo{maybe sample flow file in codeblock/figure-env}
+Scenario 1 results in a flow file that looks like this:
+
+\begin{verbatim}
+Flow 1 (1.0.0.2:49153 -> 7.0.0.6:1234) proto UDP
+  Tx Packets: 6000
+  Tx Bytes:   768000
+  TxOffered:  10.240000 Mbps
+  Rx Bytes:   767104
+  Throughput: 10.228053 Mbps
+  Mean delay:  0.786401 ms
+  Mean jitter:  0.119959 ms
+  Rx Packets: 5993
+Flow 2 (1.0.0.2:49154 -> 7.0.0.4:1235) proto UDP
+  Tx Packets: 60
+  Tx Bytes:   7680
+  TxOffered:  0.102400 Mbps
+  Rx Bytes:   7680
+  Throughput: 0.102400 Mbps
+  Mean delay:  1.756546 ms
+  Mean jitter:  0.049405 ms
+  Rx Packets: 60
+Flow 3 (1.0.0.2:49155 -> 7.0.0.5:1235) proto UDP
+  Tx Packets: 60
+  Tx Bytes:   7680
+  TxOffered:  0.102400 Mbps
+  Rx Bytes:   7680
+  Throughput: 0.102400 Mbps
+  Mean delay:  1.827379 ms
+  Mean jitter:  0.048810 ms
+  Rx Packets: 60
+Flow 4 (1.0.0.2:49156 -> 7.0.0.2:1236) proto UDP
+  Tx Packets: 6000
+  Tx Bytes:   768000
+  TxOffered:  10.240000 Mbps
+  Rx Bytes:   764160
+  Throughput: 10.188800 Mbps
+  Mean delay:  2.794291 ms
+  Mean jitter:  0.179825 ms
+  Rx Packets: 5970
+Flow 5 (1.0.0.2:49157 -> 7.0.0.3:1236) proto UDP
+  Tx Packets: 6000
+  Tx Bytes:   768000
+  TxOffered:  10.240000 Mbps
+  Rx Bytes:   764160
+  Throughput: 10.188800 Mbps
+  Mean delay:  2.867154 ms
+  Mean jitter:  0.179801 ms
+  Rx Packets: 5970
+
+
+  Mean flow throughput: 6.162091
+  Mean flow delay: 2.006354
+
+Nodes: 
+  EMBB Slice: 
+    7.0.0.2
+    7.0.0.3
+  MMTC Slice: 
+    7.0.0.4
+    7.0.0.5
+  URLLC Slice: 
+    7.0.0.6
+  Ground Stations: 
+    10.0.0.5
+\end{verbatim}
 
 \section{Trace data of all Device Operations with Packets}
 Using the PointToPointHelper and the AsciiTraceHelper of ns-3, we create a .tr file that contains one trace event per line. 
