@@ -157,6 +157,16 @@ You now can run your ns-3 scripts via the CMake extension.
     NS3_WARNINGS_AS_ERRORS
 \end{verbatim} \textbf{in the root CMakeLists.txt.}
 
+\section{Jupyter Notebook Setup}
+We used a Jupyter notebook to evaluate and visualise the gathered data, as well as a script to execute multiple simulations in a row. The setup is very basic:
+\begin{itemize}
+    \item For the installation of Jupyter, check out \url{https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/}
+    \item Once you're done with the installation open up the Jupyter notebook under \begin{verbatim}
+        ./notebook/data_notebook.ipynb
+    \end{verbatim}
+    \item Inside the notebook there will be all the documentation about the usage of itself.
+\end{itemize}
+
 \section{Implementation details}
     Our base simulation is based on standard 5G-Lena examples. Therefore we will not go too in depth on explaining that part of the simulation.
     Mainly we will focus on our take on slicing.
