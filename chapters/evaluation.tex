@@ -4,8 +4,17 @@
 
 \chapter{Evaluation and Discussion}
 \label{chapter:evaluation}
-\section{Was man aus daten lernt}
-    Jonas mit Jupyter notebook
+\section{Learning from the data}
+    The most important finding is, that slice isolation works. That means if one slice is under a DDos attack, other slices will be unaffected. This can be seen in the following graphs:
+    
+    \includegraphics[width=\textwidth]{img/slice_isolation_works_single.png}
+    
+    This first graph shows, that the DDos attack on a slice (MMTC) has no effect on a different slice (EMBB).
+    
+    \includegraphics[width=\textwidth]{img/slice_isolation_works_dossed_slices.png}
+    
+    This second one shows the same point across all possible slice attacks. Only when the EMBB slice is under the attack the throughput of it decreases. This answers our second research question, that slice isolation is a useful tool as a counter measure against DDos attacks.\\
+    Data evaluation can also be used in later stages from other teams. Inside our Jupyter Notebook are tools to continue the data evaluation.
     
 \section{Problems with the Implementation}
     \subsection{Slicing and Machine Learning}
