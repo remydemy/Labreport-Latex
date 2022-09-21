@@ -6,4 +6,10 @@
 \chapter{Conclusions}
 \label{chapter:conclusions}
 
-Don't.
+DDoS attacks can have a fatal impact on a network. In our simulation, even with a low amount of bots constantly attacking on all slices, the throughput for all other nodes can be brought down to zero.
+
+Slicing with slice isolation is a useful counter measure. In our simulation it completely prevented attackers on one slice from impacting the traffic on the other slices in any way.
+
+Both observations may differ in real world scenarios, as our simulations can only portrait a simplified version of a 5G NR network. Slice isolation can be implemented in various ways and might not prevent perfect separation as we saw in our simulation.
+
+To build on our findings, it might be promising to automatically detect nodes executing a DDoS attack and dynamically assign them all to a separate slice in order to prevent them from impacting the regular 5G NR network traffic. This was not possible to include in our simulation due to the slicing approach we chose.

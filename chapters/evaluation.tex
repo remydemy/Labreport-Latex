@@ -5,7 +5,12 @@
 \chapter{Evaluation and Discussion}
 \label{chapter:evaluation}
 \section{Learning from the data}
-    The most important finding is, that slice isolation works. That means if one slice is under a DDos attack, other slices will be unaffected. This can be seen in the following graphs:
+
+	By analysing and plotting the data provided in the Flow Summary Files, we see, that DDoS has a fatal impact on our simulation. Once an attack is happening on a slice, no other throughput is reaching the nodes on this slice:
+	
+	\includegraphics[width=\textwidth]{img/slice_dos_works.png}
+
+    The most important finding here is, that slice isolation works. That means if one slice is under a DDoS attack, other slices will be unaffected. This can be seen in the following graphs:
     
     \includegraphics[width=\textwidth]{img/slice_isolation_works_single.png}
     
@@ -13,8 +18,9 @@
     
     \includegraphics[width=\textwidth]{img/slice_isolation_works_dossed_slices.png}
     
-    This second one shows the same point across all possible slice attacks. Only when the EMBB slice is under the attack the throughput of it decreases. This answers our second research question, that slice isolation is a useful tool as a counter measure against DDos attacks.\\
-    Data evaluation can also be used in later stages from other teams. Inside our Jupyter Notebook are tools to continue the data evaluation.
+    This second one shows the same point across all possible slice attacks. Only when the EMBB slice is under the attack the throughput of it decreases. The same result was achieved for all slices. This answers our second research question: slice isolation is a useful tool as a counter measure against DDoS attacks. In the perfect case we see here, it completely prevents attackers on a slice from affecting the nodes on other slices.
+    
+    The data evaluation is flexible and can also be used with more or different types of data. Inside our Jupyter Notebook are tools to continue the data evaluation.
     
 \section{Problems with the Implementation}
     \subsection{Slicing and Machine Learning}
